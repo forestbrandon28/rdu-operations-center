@@ -1,0 +1,19 @@
+body{
+    background:#05070a;
+    color:white;
+    font-family:Segoe UI;
+    padding:25px;
+}
+
+h1{
+    color:#38bdf8;
+}
+
+.card{
+    background:#18181b;
+    border:1px solid #27272a;
+    border-radius:12px;
+    padding:15px;
+    margin-bottom:10px;
+    max-width:350px;
+}

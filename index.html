@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RDU Operations Center</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <header class="header">
+        <div>
+            <h1>RDU Operations Center</h1>
+            <p class="subtitle">Weather and outside-effects operational dashboard</p>
+        </div>
+
+        <div class="updated">
+            Last updated:
+            <span id="lastUpdated">Loading...</span>
+        </div>
+    </header>
+
+    <section class="metric-grid">
+
+        <article class="card">
+            <div class="label">Delay Minutes</div>
+            <div id="delayMinutes" class="value">--</div>
+        </article>
+
+        <article class="card">
+            <div class="label">Weather Events</div>
+            <div id="weatherEvents" class="value">--</div>
+        </article>
+
+        <article class="card">
+            <div class="label">Average Delay</div>
+            <div id="averageDelay" class="value">--</div>
+        </article>
+
+        <article class="card">
+            <div class="label">Aircraft Affected</div>
+            <div id="aircraftAffected" class="value">--</div>
+        </article>
+
+        <article class="card">
+            <div class="label">Reporting Period</div>
+            <div id="reportingPeriod" class="value small-value">--</div>
+        </article>
+
+    </section>
+
+    <section class="content-grid">
+
+        <article class="panel">
+
+            <h2>KRDU Weather Conditions</h2>
+
+            <div class="weather-grid">
+
+                <div class="weather-item">
+                    <span>Airport</span>
+                    <strong id="airport">--</strong>
+                </div>
+
+                <div class="weather-item">
+                    <span>Temperature</span>
+                    <strong id="temperature">--</strong>
+                </div>
+
+                <div class="weather-item">
+                    <span>Wind</span>
+                    <strong id="wind">--</strong>
+                </div>
+
+                <div class="weather-item">
+                    <span>Visibility</span>
+                    <strong id="visibility">--</strong>
+                </div>
+
+                <div class="weather-item">
+                    <span>Ceiling</span>
+                    <strong id="ceiling">--</strong>
+                </div>
+
+                <div class="weather-item">
+                    <span>Conditions</span>
+                    <strong id="conditions">--</strong>
+                </div>
+
+            </div>
+
+        </article>
+
+        <article class="panel">
+
+            <h2>Operational Forecast</h2>
+
+            <div class="weather-grid forecast-summary">
+
+                <div class="weather-item">
+                    <span>Scenario</span>
+                    <strong id="scenario">--</strong>
+                </div>
+
+                <div class="weather-item">
+                    <span>Projected Delay</span>
+                    <strong id="projectedDelayHours">--</strong>
+                </div>
+
+                <div class="weather-item">
+                    <span>Risk Level</span>
+                    <strong id="riskLevel">--</strong>
+                </div>
+
+                <div class="weather-item">
+                    <span>Primary Risk</span>
+                    <strong id="primaryRisk">--</strong>
+                </div>
+
+            </div>
+
+            <div id="forecastGrid" class="forecast-grid"></div>
+
+        </article>
+
+        <article class="panel panel-wide">
+
+            <h2>Recent Delay Events</h2>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Flight</th>
+                            <th>Weather</th>
+                            <th>Operational Effect</th>
+                            <th>Delay</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="delayTableBody"></tbody>
+
+                </table>
+
+            </div>
+
+        </article>
+
+    </section>
+
+    <div id="systemStatus" class="status">
+        Loading dashboard data...
+    </div>
+
+</div>
+
+<script src="./js/app.js"></script>
+
+</body>
+</html>

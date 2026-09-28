@@ -1,0 +1,23 @@
+﻿{
+  "scenario": "Baseline Operational Forecast",
+  "projectedDelayHours": 48,
+  "riskLevel": "Moderate",
+  "primaryRisk": "Seasonal weather exposure",
+  "outlook": [
+    {
+      "period": "Best Case",
+      "delayHours": 22,
+      "risk": "Low"
+    },
+    {
+      "period": "Expected",
+      "delayHours": 48,
+      "risk": "Moderate"
+    },
+    {
+      "period": "High Impact",
+      "delayHours": 76,
+      "risk": "High"
+    }
+  ]
+}

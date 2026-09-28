@@ -1,0 +1,38 @@
+﻿[
+  {
+    "id": 1,
+    "date": "2026-09-21",
+    "flight": "9E3420",
+    "weather": "Thunderstorm",
+    "effect": "Ground Stop",
+    "delayMin": 95,
+    "status": "Closed"
+  },
+  {
+    "id": 2,
+    "date": "2026-09-22",
+    "flight": "9E3511",
+    "weather": "Low Visibility",
+    "effect": "ATC Delay",
+    "delayMin": 42,
+    "status": "Closed"
+  },
+  {
+    "id": 3,
+    "date": "2026-09-24",
+    "flight": "9E3648",
+    "weather": "High Wind",
+    "effect": "Gate Hold",
+    "delayMin": 31,
+    "status": "Closed"
+  },
+  {
+    "id": 4,
+    "date": "2026-09-27",
+    "flight": "9E3442",
+    "weather": "Thunderstorm",
+    "effect": "Ground Stop",
+    "delayMin": 95,
+    "status": "Monitoring"
+  }
+]
