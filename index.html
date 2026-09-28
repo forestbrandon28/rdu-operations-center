@@ -4,51 +4,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RDU Operations Center</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <title>RDU IROP Operations Monitor</title>
+    <link rel="stylesheet" href="./css/irop.css">
 </head>
 
 <body>
 
-<div class="dashboard">
+<main class="dashboard">
 
-    <header class="header">
+    <header class="site-header">
         <div>
-            <h1>RDU Operations Center</h1>
-            <p class="subtitle">Weather and outside-effects operational dashboard</p>
+            <p class="eyebrow">RDU Operational Decision Support</p>
+            <h1>RDU IROP Operations Monitor</h1>
+            <p class="subtitle">
+                Live FAA operational status and official KRDU aviation weather
+            </p>
         </div>
 
-        <div class="updated">
-            Last updated:
-            <span id="lastUpdated">Loading...</span>
+        <div class="header-status">
+            <span>Last assessment</span>
+            <strong id="assessmentTime">Loading...</strong>
         </div>
     </header>
 
+    <section id="commandBanner" class="command-banner command-loading">
+        <div>
+            <span class="banner-label">Current Operational Assessment</span>
+            <h2 id="iropLabel">LOADING OPERATIONAL DATA</h2>
+            <p id="iropRecommendation">
+                Connecting to the RDU operations data service...
+            </p>
+        </div>
+
+        <div class="banner-score">
+            <span>Risk Score</span>
+            <strong id="iropScore">--</strong>
+        </div>
+    </section>
+
     <section class="metric-grid">
 
-        <article class="card">
-            <div class="label">Delay Minutes</div>
-            <div id="delayMinutes" class="value">--</div>
+        <article class="metric-card">
+            <span class="metric-label">FAA RDU Status</span>
+            <strong id="faaStatus" class="metric-value">Loading</strong>
+            <small id="faaSummary">Checking FAA NAS Status</small>
         </article>
 
-        <article class="card">
-            <div class="label">Weather Events</div>
-            <div id="weatherEvents" class="value">--</div>
+        <article class="metric-card">
+            <span class="metric-label">Active FAA Event</span>
+            <strong id="activeFaaEvent" class="metric-value">--</strong>
+            <small id="faaEventReason">No event data loaded</small>
         </article>
 
-        <article class="card">
-            <div class="label">Average Delay</div>
-            <div id="averageDelay" class="value">--</div>
+        <article class="metric-card">
+            <span class="metric-label">Flight Category</span>
+            <strong id="flightCategory" class="metric-value">--</strong>
+            <small id="metarAge">Waiting for METAR</small>
         </article>
 
-        <article class="card">
-            <div class="label">Aircraft Affected</div>
-            <div id="aircraftAffected" class="value">--</div>
+        <article class="metric-card">
+            <span class="metric-label">Active Triggers</span>
+            <strong id="activeTriggerCount" class="metric-value">--</strong>
+            <small>FAA and weather triggers</small>
         </article>
 
-        <article class="card">
-            <div class="label">Reporting Period</div>
-            <div id="reportingPeriod" class="value small-value">--</div>
+        <article class="metric-card">
+            <span class="metric-label">Internal Declaration</span>
+            <strong id="declarationStatus" class="metric-value small-value">
+                NOT DECLARED
+            </strong>
+            <small>Authorized action required</small>
         </article>
 
     </section>
@@ -56,113 +81,175 @@
     <section class="content-grid">
 
         <article class="panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="panel-kicker">Official Source</span>
+                    <h2>FAA RDU Operations</h2>
+                </div>
+                <span id="faaLiveBadge" class="source-badge">CONNECTING</span>
+            </div>
 
-            <h2>KRDU Weather Conditions</h2>
+            <div id="faaEvents" class="event-list">
+                <div class="empty-state">
+                    Loading FAA operational events...
+                </div>
+            </div>
+
+            <div class="source-time">
+                FAA feed updated:
+                <strong id="faaUpdateTime">Loading...</strong>
+            </div>
+        </article>
+
+        <article class="panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="panel-kicker">Decision Support</span>
+                    <h2>Active Trigger Board</h2>
+                </div>
+            </div>
+
+            <div id="triggerBoard" class="trigger-board">
+                <div class="empty-state">
+                    Evaluating FAA and weather conditions...
+                </div>
+            </div>
+
+            <p class="decision-notice">
+                Automated recommendations do not constitute an internal IROP declaration.
+            </p>
+        </article>
+    </section>
+
+    <section class="content-grid">
+
+        <article class="panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="panel-kicker">Official Observation</span>
+                    <h2>KRDU METAR</h2>
+                </div>
+                <span id="metarCategoryBadge" class="flight-badge">--</span>
+            </div>
 
             <div class="weather-grid">
-
                 <div class="weather-item">
-                    <span>Airport</span>
-                    <strong id="airport">--</strong>
-                </div>
-
-                <div class="weather-item">
-                    <span>Temperature</span>
-                    <strong id="temperature">--</strong>
-                </div>
-
-                <div class="weather-item">
-                    <span>Wind</span>
-                    <strong id="wind">--</strong>
+                    <span>Observation Time</span>
+                    <strong id="metarReportTime">--</strong>
                 </div>
 
                 <div class="weather-item">
                     <span>Visibility</span>
-                    <strong id="visibility">--</strong>
+                    <strong id="metarVisibility">--</strong>
                 </div>
 
                 <div class="weather-item">
                     <span>Ceiling</span>
-                    <strong id="ceiling">--</strong>
+                    <strong id="metarCeiling">--</strong>
                 </div>
 
                 <div class="weather-item">
-                    <span>Conditions</span>
-                    <strong id="conditions">--</strong>
+                    <span>Wind</span>
+                    <strong id="metarWind">--</strong>
                 </div>
 
+                <div class="weather-item">
+                    <span>Temperature</span>
+                    <strong id="metarTemperature">--</strong>
+                </div>
+
+                <div class="weather-item">
+                    <span>Dew Point</span>
+                    <strong id="metarDewpoint">--</strong>
+                </div>
             </div>
 
+            <h3>Raw METAR</h3>
+            <pre id="rawMetar" class="raw-weather">Loading...</pre>
         </article>
 
         <article class="panel">
-
-            <h2>Operational Forecast</h2>
-
-            <div class="weather-grid forecast-summary">
-
-                <div class="weather-item">
-                    <span>Scenario</span>
-                    <strong id="scenario">--</strong>
+            <div class="panel-heading">
+                <div>
+                    <span class="panel-kicker">Official Forecast</span>
+                    <h2>KRDU TAF</h2>
                 </div>
-
-                <div class="weather-item">
-                    <span>Projected Delay</span>
-                    <strong id="projectedDelayHours">--</strong>
-                </div>
-
-                <div class="weather-item">
-                    <span>Risk Level</span>
-                    <strong id="riskLevel">--</strong>
-                </div>
-
-                <div class="weather-item">
-                    <span>Primary Risk</span>
-                    <strong id="primaryRisk">--</strong>
-                </div>
-
             </div>
 
-            <div id="forecastGrid" class="forecast-grid"></div>
+            <div class="weather-grid">
+                <div class="weather-item">
+                    <span>Issue Time</span>
+                    <strong id="tafIssueTime">--</strong>
+                </div>
 
-        </article>
+                <div class="weather-item">
+                    <span>Valid From</span>
+                    <strong id="tafValidFrom">--</strong>
+                </div>
 
-        <article class="panel panel-wide">
+                <div class="weather-item">
+                    <span>Valid To</span>
+                    <strong id="tafValidTo">--</strong>
+                </div>
 
-            <h2>Recent Delay Events</h2>
-
-            <div class="table-wrapper">
-
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Flight</th>
-                            <th>Weather</th>
-                            <th>Operational Effect</th>
-                            <th>Delay</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="delayTableBody"></tbody>
-
-                </table>
-
+                <div class="weather-item">
+                    <span>Decoded Periods</span>
+                    <strong id="tafPeriodCount">--</strong>
+                </div>
             </div>
 
+            <h3>Raw TAF</h3>
+            <pre id="rawTaf" class="raw-weather raw-taf">Loading...</pre>
         </article>
-
     </section>
 
-    <div id="systemStatus" class="status">
-        Loading dashboard data...
-    </div>
+    <section class="panel declaration-panel">
+        <div class="panel-heading">
+            <div>
+                <span class="panel-kicker">Authorized Local Action</span>
+                <h2>Internal IROP Declaration</h2>
+            </div>
+        </div>
 
-</div>
+        <p class="decision-notice">
+            Declaration controls will be activated after the monitoring and trigger logic passes operational testing.
+        </p>
 
-<script src="./js/app.js"></script>
+        <button type="button" class="declaration-button" disabled>
+            Declare Internal IROP
+        </button>
+    </section>
+
+    <section class="panel timeline-panel">
+        <div class="panel-heading">
+            <div>
+                <span class="panel-kicker">Operational History</span>
+                <h2>Current Session Timeline</h2>
+            </div>
+        </div>
+
+        <div id="eventTimeline" class="timeline">
+            <div class="timeline-entry">
+                <time>Pending</time>
+                <div>Waiting for the first operational assessment.</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>
+            Decision-support tool only. Confirm operational conditions through official FAA,
+            NOAA, airport, dispatch, and organizational channels.
+        </p>
+
+        <p id="connectionStatus">
+            Connecting to operational data services...
+        </p>
+    </footer>
+
+</main>
+
+<script src="./js/irop-monitor.js"></script>
 
 </body>
 </html>
